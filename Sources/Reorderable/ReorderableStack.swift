@@ -276,7 +276,7 @@ package struct ReorderableStack<Axis: ContainerAxis, Data: RandomAccessCollectio
   ///
   /// This is to help with the hysteresis cases where the user wants to switch back to the position the element was even though that they're still hovering over the previous element after changing spot.
   private func notAtOtherEdge(currentIndex: Int, element: (key: Data.Element.ID, value: Axis.Position), position: CGFloat) -> Bool {
-    let edgeBumperSize = 64.0
+    let edgeBumperSize = min(64.0, element.value.span / 2)
     
     let otherIndex = data.firstIndex(where: { $0.id == element.key})!
     if (currentIndex > otherIndex) {
